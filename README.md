@@ -125,54 +125,53 @@
 <!-- ========= START DEMO Video  ========= -->
 
 
-<br><br><br><br>
+<!-- <br><br><br><br> ========= -->
 <!-- ========= END Video building-llms-yann-dubois-stanford-cs229-2024 ========= -->
 
 
-## [Visão geral]()
+## [Overview]()
 
-O **MCP Smart Incident Analyzer** é um projeto de arquitetura distribuída voltado à análise inteligente de incidentes relacionados a sistemas de **IA (Inteligência Artificial)**. O núcleo da proposta é o uso de **MCP (Model Context Protocol)** como base para comunicação estruturada entre componentes, agentes e serviços especializados.
+The **MCP Smart Incident Analyzer** is a distributed architecture project focused on the intelligent analysis of incidents related to **AI (Artificial Intelligence)** systems. The core of the proposal is the use of **MCP (Model Context Protocol)** as the foundation for structured communication among components, agents, and specialized services.
 
-Na prática, o sistema foi concebido para receber eventos, ocorrências, falhas, desvios ou comportamentos inesperados em ambientes baseados em IA, organizar esse material como contexto analítico e encaminhá-lo para módulos especializados de interpretação. O objetivo é transformar incidentes complexos em casos rastreáveis, explicáveis, documentáveis e auditáveis.
+In practice, the system was designed to receive events, occurrences, failures, deviations, or unexpected behaviors in AI-based environments, organize this material as analytical context, and route it to specialized interpretation modules. The goal is to transform complex incidents into traceable, explainable, documentable, and auditable cases.
 
-Este README-mestre foi projetado para cumprir quatro funções ao mesmo tempo:
+This master README was designed to fulfill four functions simultaneously:
 
-1. **Documentação técnica** — explica arquitetura, lógica, componentes e funcionamento.
-2. **Base para relatório acadêmico** — organiza a fundamentação técnica de forma aproveitável em texto formal.
-3. **Base para apresentação** — cada seção pode ser convertida em um ou mais slides.
-4. **README principal de GitHub** — centraliza a visão institucional e técnica do projeto.
+1. **Technical documentation** — explains the architecture, logic, components, and operation.
+2. **Foundation for academic reports** — structures the technical background in a way that can be reused in formal writing.
+3. **Presentation base** — each section can be converted into one or more slides.
+4. **Main GitHub README** — centralizes the institutional and technical vision of the project.
 
-
-<br><br>
-
-## Índice
-
-- [1. Contexto do problema](#1-contexto-do-problema)
-- [2. Objetivo do projeto](#2-objetivo-do-projeto)
-- [3. Proposta da solução](#3-proposta-da-solução)
-- [4. Por que usar MCP](#4-por-que-usar-mcp)
-- [5. Conceitos e siglas fundamentais](#5-conceitos-e-siglas-fundamentais)
-- [6. Arquitetura da solução](#6-arquitetura-da-solução)
-- [7. Arquitetura lógica e arquitetura física](#7-arquitetura-lógica-e-arquitetura-física)
-- [8. Componentes principais](#8-componentes-principais)
-- [9. Fluxo operacional do sistema](#9-fluxo-operacional-do-sistema)
-- [10. Estrutura do projeto](#10-estrutura-do-projeto)
-- [11. Tecnologias utilizadas](#11-tecnologias-utilizadas)
-- [12. Como o sistema funciona na prática](#12-como-o-sistema-funciona-na-prática)
-- [13. Como executar o projeto](#13-como-executar-o-projeto)
-- [14. Exemplo de uso](#14-exemplo-de-uso)
-- [15. Casos de uso](#15-casos-de-uso)
-- [16. Diferenciais técnicos](#16-diferenciais-técnicos)
-- [17. Benefícios acadêmicos e práticos](#17-benefícios-acadêmicos-e-práticos)
-- [18. Limitações atuais](#18-limitações-atuais)
-- [19. Evoluções futuras](#19-evoluções-futuras)
-- [20. Organização para relatório e apresentação](#20-organização-para-relatório-e-apresentação)
-- [21. Preview esperado da interface](#21-preview-esperado-da-interface)
-- [22. Licença](#22-licença)
-- [23. Conclusão](#23-conclusão)
 
 <br><br>
 
+## Table of Contents
+
+- [1. Problem Context](#1-problem-context)
+- [2. Project Objective](#2-project-objective)
+- [3. Proposed Solution](#3-proposed-solution)
+- [4. Why Use MCP](#4-why-use-mcp)
+- [5. Core Concepts and Acronyms](#5-core-concepts-and-acronyms)
+- [6. Solution Architecture](#6-solution-architecture)
+- [7. Logical and Physical Architecture](#7-logical-and-physical-architecture)
+- [8. Main Components](#8-main-components)
+- [9. System Operational Flow](#9-system-operational-flow)
+- [10. Project Structure](#10-project-structure)
+- [11. Technologies Used](#11-technologies-used)
+- [12. How the System Works in Practice](#12-how-the-system-works-in-practice)
+- [13. How to Run the Project](#13-how-to-run-the-project)
+- [14. Usage Example](#14-usage-example)
+- [15. Use Cases](#15-use-cases)
+- [16. Technical Differentiators](#16-technical-differentiators)
+- [17. Academic and Practical Benefits](#17-academic-and-practical-benefits)
+- [18. Current Limitations](#18-current-limitations)
+- [19. Future Developments](#19-future-developments)
+- [20. Organization for Reports and Presentations](#20-organization-for-reports-and-presentations)
+- [21. Expected Interface Preview](#21-expected-interface-preview)
+- [22. License](#22-license)
+- [23. Conclusion](#23-conclusion)
+
+<br><br>
 
 
 
