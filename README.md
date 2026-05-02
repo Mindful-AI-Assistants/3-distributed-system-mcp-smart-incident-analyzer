@@ -135,13 +135,6 @@ The **MCP Smart Incident Analyzer** is a distributed architecture project focuse
 
 In practice, the system was designed to receive events, occurrences, failures, deviations, or unexpected behaviors in AI-based environments, organize this material as analytical context, and route it to specialized interpretation modules. The goal is to transform complex incidents into traceable, explainable, documentable, and auditable cases.
 
-This master README was designed to fulfill four functions simultaneously:
-
-1. **Technical documentation** — explains the architecture, logic, components, and operation.
-2. **Foundation for academic reports** — structures the technical background in a way that can be reused in formal writing.
-3. **Presentation base** — each section can be converted into one or more slides.
-4. **Main GitHub README** — centralizes the institutional and technical vision of the project.
-
 
 <br><br>
 
