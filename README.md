@@ -195,7 +195,7 @@ In practice, the system was designed to receive events, occurrences, failures, d
 <br><br>
 
 
-## MCP Incident Pipeline · Architecture Overview
+## [MCP Incident Pipeline · Architecture Overview]()
 
 <br><br>
 
@@ -230,7 +230,6 @@ flowchart TB
     H --> K
     H --> L
 ```
-
 
 
 <br><br>
