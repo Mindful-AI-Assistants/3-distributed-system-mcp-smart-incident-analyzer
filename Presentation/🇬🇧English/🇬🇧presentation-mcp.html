@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP Smart Incident Analyzer - Presentation</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #000000;
+            --bg-light: #ffffff;
+            --text-dark: #ffffff;
+            --text-light: #000000;
+            --text-secondary-dark: rgba(255, 255, 255, 0.7);
+            --text-secondary-light: rgba(0, 0, 0, 0.6);
+            --accent: #14b8a6;
+            --accent-light: #2dd4bf;
+            --accent-dark: #0d9488;
+            --shadow: rgba(20, 184, 166, 0.1);
+            --divider-dark: rgba(255, 255, 255, 0.1);
+            --divider-light: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-dark);
+            overflow: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.light-mode {
+            background: var(--bg-light);
+            color: var(--text-light);
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 120px;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateY(0);
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .light-mode h3 {
+            color: var(--accent-dark);
+        }
+
+        p {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto 1.5rem;
+            color: var(--text-secondary-dark);
+        }
+
+        .light-mode p {
+            color: var(--text-secondary-light);
+        }
+
+        .subtitle {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .light-mode .subtitle {
+            color: var(--accent-dark);
+        }
+
+        .authors {
+            margin-top: 4rem;
+            font-size: 1.2rem;
+            color: var(--text-secondary-dark);
+        }
+
+        .light-mode .authors {
+            color: var(--text-secondary-light);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--accent);
+            color: white;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 500;
+            margin: 0.5rem;
+        }
+
+        .list {
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .list-item {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--text-secondary-dark);
+        }
+
+        .light-mode .list-item {
+            color: var(--text-secondary-light);
+        }
+
+        .list-item:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        .highlight {
+            color: var(--accent-light);
+            font-weight: 500;
+        }
+
+        .light-mode .highlight {
+            color: var(--accent-dark);
+        }
+
+        .diagram {
+            margin: 2rem auto;
+            padding: 2rem;
+            border: 1px solid var(--divider-dark);
+            border-radius: 12px;
+            max-width: 700px;
+            background: rgba(20, 184, 166, 0.05);
+        }
+
+        .light-mode .diagram {
+            border-color: var(--divider-light);
+            background: rgba(20, 184, 166, 0.03);
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .control-btn {
+            background: rgba(20, 184, 166, 0.2);
+            border: 1px solid var(--accent);
+            color: var(--text-dark);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .light-mode .control-btn {
+            background: rgba(20, 184, 166, 0.1);
+            border-color: var(--accent-dark);
+            color: var(--text-light);
+        }
+
+        .control-btn:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .progress {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            font-size: 0.9rem;
+            color: var(--text-secondary-dark);
+            z-index: 100;
+        }
+
+        .light-mode .progress {
+            color: var(--text-secondary-light);
+        }
+
+        .code-block {
+            background: rgba(20, 184, 166, 0.05);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+            font-size: 1rem;
+            text-align: left;
+            max-width: 600px;
+            margin: 1rem auto;
+            color: var(--accent-light);
+        }
+
+        .light-mode .code-block {
+            background: rgba(20, 184, 166, 0.03);
+            border-color: var(--accent-dark);
+            color: var(--accent-dark);
+        }
+
+        .nav-btn {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(20, 184, 166, 0.1);
+            border: 1px solid var(--accent);
+            color: var(--text-dark);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            z-index: 100;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .light-mode .nav-btn {
+            border-color: var(--accent-dark);
+            color: var(--text-light);
+            background: rgba(20, 184, 166, 0.05);
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 4px 12px var(--shadow);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .nav-btn.prev {
+            left: 20px;
+        }
+
+        .nav-btn.next {
+            right: 20px;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .exporting .slide {
+            opacity: 1 !important;
+            transform: none !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+        }
+
+        .exporting .slide>* {
+            animation: none !important;
+        }
+
+        .exporting .controls,
+        .exporting .progress,
+        .exporting .nav-btn {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 60px 40px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+            }
+
+            p,
+            .list-item {
+                font-size: 1.1rem;
+            }
+
+            .controls {
+                bottom: 15px;
+                right: 15px;
+                flex-wrap: wrap;
+            }
+
+            .control-btn {
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide.active>* {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .slide.active>*:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .slide.active>*:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .slide.active>*:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const slides = [
+            {
+                type: 'cover',
+                title: 'MCP Smart Incident Analyzer',
+                subtitle: 'Distributed Communication for AI with MCP',
+                authors: ['Professor: Carlos Eduardo', 'Authors: Fabiana Campanari • Pedro Vyctor Almeida']
+            },
+            {
+                type: 'content',
+                title: 'Problem Context',
+                content: [
+                    'AI systems are growing in complexity and scale',
+                    'Incidents emerge from the interaction between multiple components',
+                    'Distributed, contextual, and multi-factorial analysis',
+                    'Monolithic systems make investigation and auditing difficult'
+                ]
+            },
+            {
+                type: 'content',
+                title: 'The Challenge',
+                content: [
+                    'How to reconstruct what happened?',
+                    'How to identify the root cause of the error?',
+                    'How to produce auditable explanations?',
+                    'How to structure analysis in a distributed environment?'
+                ]
+            },
+            {
+                type: 'content',
+                title: 'Project Objective',
+                subtitle: 'Analyze AI incidents in a structured way',
+                content: [
+                    'Standardize context exchange between modules',
+                    'Improve incident traceability',
+                    'Organize communication between specialized services',
+                    'Facilitate technical and documentary analysis',
+                    'Create a foundation for expansion with new MCP servers'
+                ]
+            },
+            {
+                type: 'content',
+                title: 'Proposed Solution',
+                subtitle: 'Distributed architecture centered around MCP',
+                content: [
+                    'Each component exercises a specific responsibility',
+                    'Incidents transformed into structured context',
+                    'Routing to specialized modules via MCP',
+                    'Consolidated, explainable, and useful analysis',
+                    'MCP servers as the operational heart of the system'
+                ]
+            },
+            {
+                type: 'concept',
+                title: 'What is MCP?',
+                subtitle: 'Model Context Protocol',
+                explanation: 'A protocol aimed at structured context exchange between models, applications, agents, and tools.',
+                purpose: 'What is it for',
+                details: [
+                    'Transport context between system components',
+                    'Structure requests and responses',
+                    'Facilitate interoperability between services',
+                    'Reduce coupling between modules',
+                    'Enable clear orchestration of analytical flows'
+                ]
+            },
+            {
+                type: 'content',
+                title: 'Why is MCP important?',
+                content: [
+                    'Multiple components participate in the final decision',
+                    'Without a protocol, communication becomes improvised',
+                    'Hinders maintenance and auditing',
+                    'MCP makes communication predictable and modular',
+                    'Transforms complexity into technical clarity'
+                ]
+            },
+            {
+                type: 'content',
+                title: 'Fundamental Concepts',
+                subtitle: 'Essential project acronyms',
+                content: [
+                    'AI (Artificial Intelligence) — analytical and interpretative capabilities',
+                    'LLM (Large Language Model) — textual and contextual analysis',
+                    'API (Application Programming Interface) — system integration',
+                    'JSON (JavaScript Object Notation) — data exchange format',
+                    'Log — event recording for traceability'
+                ]
+            },
+            {
+                type: 'architecture',
+                title: 'Solution Architecture',
+                subtitle: 'Overview of components',
+                components: [
+                    'Client → sends incidents',
+                    'Orchestrator → coordinates analysis',
+                    'MCP Servers → process specifically',
+                    'Analysis Module → consolidates results',
+                    'Interface → presents insights'
+                ]
+            },
+            {
+                type: 'content',
+                title: 'Core Components',
+                subtitle: 'Orchestrator',
+                content: [
+                    'Entry point of the system',
+                    'Receives incidents and context',
+                    'Routes to specialized servers',
+                    'Consolidates responses',
+                    'Coordinates analysis flow'
+                ]
+            },
+            {
+                type: 'content',
+                title: 'Core Components',
+                subtitle: 'MCP Servers',
+                content: [
+                    'Operational heart of the distributed system',
+                    'Each server has a specific responsibility',
+                    'Context analysis, classification, prioritization',
+                    'Communication via MCP protocol',
+                    'Extensible and modular'
+                ]
+            },
+            {
+                type: 'flow',
+                title: 'Operational Flow',
+                steps: [
+                    '1. Client submits incident',
+                    '2. Orchestrator receives and prepares context',
+                    '3. MCP Servers analyze specifically',
+                    '4. Consolidated responses',
+                    '5. Interface presents complete analysis'
+                ]
+            },
+            {
+                type: 'content',
+                title: 'Technologies Used',
+                content: [
+                    'Python 3.10+ — base language',
+                    'MCP Protocol — communication between components',
+                    'JSON-RPC 2.0 — message structure',
+                    'asyncio — asynchronous processing',
+                    'pytest — automated tests'
+                ]
+            },
+            {
+                type: 'example',
+                title: 'How it Works in Practice',
+                scenario: 'AI system produces an inappropriate response',
+                analysis: [
+                    'What was the received input?',
+                    'How was the context assembled?',
+                    'Which modules participated?',
+                    'What classification was assigned?',
+                    'Are there similar historical cases?',
+                    'How was the final response constructed?'
+                ]
+            },
+            {
+                type: 'content',
+                title: 'Use Cases',
+                content: [
+                    'Inappropriate response in a sensitive context',
+                    'Automatic triage of multiple incidents',
+                    'Support for auditing and documentation',
+                    'Academic and experimental environment',
+                    'Demonstration of distributed systems'
+                ]
+            },
+            {
+                type: 'content',
+                title: 'Technical Differentiators',
+                content: [
+                    'MCP as the central axis of the architecture',
+                    'Distributed organization of analysis',
+                    'Expansion through multiple MCP servers',
+                    'Clear separation between components',
+                    'Focus on traceability and documentation',
+                    'Potential for sophisticated dashboards'
+                ]
+            },
+            {
+                type: 'content',
+                title: 'Academic Benefits',
+                content: [
+                    'Facilitates explanation of distributed architecture',
+                    'Connects theory and implementation',
+                    'Basis for report and presentation',
+                    'Allows discussion of context and observability',
+                    'Demonstrates practical interoperability'
+                ]
+            },
+            {
+                type: 'content',
+                title: 'Practical Benefits',
+                content: [
+                    'Improves analysis organization',
+                    'Increases operational clarity',
+                    'Favors modular maintenance',
+                    'Strengthens project documentation',
+                    'Contributes to technical portfolio'
+                ]
+            },
+            {
+                type: 'content',
+                title: 'Current Limitations',
+                content: [
+                    'Implementation in maturation phase',
+                    'Need to expand integrated tests',
+                    'Additional refinement in the interface',
+                    'Incremental evolution of infrastructure',
+                    'Concrete paths for improvement identified'
+                ]
+            },
+            {
+                type: 'content',
+                title: 'Future Evolutions',
+                content: [
+                    'New specialized MCP servers',
+                    'Advanced observability mechanisms',
+                    'Automatic incident prioritization',
+                    'Automated reports',
+                    'Interactive analytical dashboards',
+                    'Enriched explainability layer'
+                ]
+            },
+            {
+                type: 'conclusion',
+                title: 'Conclusion',
+                content: [
+                    'MCP Smart Incident Analyzer proposes a structured way to think about AI incidents',
+                    'MCP at the center of component communication',
+                    'Strengthens interoperability, traceability, and clarity',
+                    'Relevant as a technical implementation and academic foundation',
+                    'Distributed, modular, and explainable system'
+                ]
+            },
+            {
+                type: 'end',
+                title: 'Thank You',
+                subtitle: 'MCP Smart Incident Analyzer',
+                footer: 'Fabiana Campanari • Pedro Vyctor Almeida'
+            }
+        ];
+
+        function Presentation() {
+            const [currentSlide, setCurrentSlide] = useState(0);
+            const [lightMode, setLightMode] = useState(false);
+            const [touchStart, setTouchStart] = useState(0);
+            const [touchEnd, setTouchEnd] = useState(0);
+
+            useEffect(() => {
+                const handleKeyDown = (e) => {
+                    if (e.key === 'ArrowRight' || e.key === ' ') {
+                        nextSlide();
+                    } else if (e.key === 'ArrowLeft') {
+                        prevSlide();
+                    } else if (e.key === 'Home') {
+                        setCurrentSlide(0);
+                    } else if (e.key === 'Escape') {
+                        if (document.fullscreenElement) {
+                            document.exitFullscreen();
+                        }
+                    }
+                };
+
+                window.addEventListener('keydown', handleKeyDown);
+                return () => window.removeEventListener('keydown', handleKeyDown);
+            }, [currentSlide]);
+
+            useEffect(() => {
+                if (lightMode) {
+                    document.body.classList.add('light-mode');
+                } else {
+                    document.body.classList.remove('light-mode');
+                }
+            }, [lightMode]);
+
+            const nextSlide = () => {
+                if (currentSlide < slides.length - 1) {
+                    setCurrentSlide(currentSlide + 1);
+                }
+            };
+
+            const prevSlide = () => {
+                if (currentSlide > 0) {
+                    setCurrentSlide(currentSlide - 1);
+                }
+            };
+
+            const toggleFullscreen = () => {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
+            };
+
+            const goHome = () => {
+                setCurrentSlide(0);
+            };
+
+            const handleTouchStart = (e) => {
+                setTouchStart(e.targetTouches[0].clientX);
+            };
+
+            const handleTouchMove = (e) => {
+                setTouchEnd(e.targetTouches[0].clientX);
+            };
+
+            const handleTouchEnd = () => {
+                if (touchStart - touchEnd > 75) {
+                    nextSlide();
+                }
+                if (touchStart - touchEnd < -75) {
+                    prevSlide();
+                }
+            };
+
+            const downloadPPTX = async () => {
+                if (typeof window.PptxGenJS === 'undefined' || typeof window.html2canvas === 'undefined') {
+                    alert('The PptxGenJS or html2canvas libraries were not loaded. Check your internet connection.');
+                    return;
+                }
+
+                try {
+                    const btn = document.querySelector('.download-btn');
+                    const originalText = btn ? btn.innerText : '⬇ PowerPoint';
+                    if (btn) btn.innerText = '⏳ Generating...';
+
+                    let pptx = new window.PptxGenJS();
+                    pptx.author = 'Fabiana Campanari, Pedro Vyctor Almeida';
+                    pptx.company = 'MCP Smart Incident Analyzer';
+                    pptx.title = 'MCP Presentation';
+                    pptx.layout = 'LAYOUT_16x9';
+
+                    const offScreen = document.createElement('div');
+                    offScreen.style.position = 'absolute';
+                    offScreen.style.left = '-9999px';
+                    offScreen.style.top = '0';
+                    offScreen.style.width = '1920px';
+                    offScreen.style.height = '1080px';
+
+                    document.body.appendChild(offScreen);
+
+                    const originalSlides = document.querySelectorAll('.slide');
+
+                    for (let i = 0; i < originalSlides.length; i++) {
+                        const clone = originalSlides[i].cloneNode(true);
+
+                        clone.style.opacity = '1';
+                        clone.style.transform = 'none';
+                        clone.style.position = 'absolute';
+                        clone.style.top = '0';
+                        clone.style.left = '0';
+                        clone.style.width = '1920px';
+                        clone.style.height = '1080px';
+                        clone.style.display = 'flex';
+                        clone.style.animation = 'none';
+
+                        const animatedElements = clone.querySelectorAll('*');
+                        animatedElements.forEach(el => {
+                            el.style.animation = 'none';
+                        });
+
+                        offScreen.innerHTML = '';
+                        offScreen.appendChild(clone);
+
+                        const canvas = await window.html2canvas(clone, {
+                            scale: 1,
+                            backgroundColor: lightMode ? '#ffffff' : '#000000',
+                            logging: false,
+                            width: 1920,
+                            height: 1080,
+                            windowWidth: 1920,
+                            windowHeight: 1080
+                        });
+
+                        const imgData = canvas.toDataURL('image/png');
+                        let slidePptx = pptx.addSlide();
+                        slidePptx.addImage({ data: imgData, x: 0, y: 0, w: '100%', h: '100%' });
+                    }
+
+                    document.body.removeChild(offScreen);
+                    pptx.writeFile({ fileName: 'Apresentacao_MCP.pptx' });
+
+                    if (btn) btn.innerText = originalText;
+
+                } catch (e) {
+                    console.error(e);
+                    alert('Error generating PowerPoint: ' + e.message);
+                    const btn = document.querySelector('.download-btn');
+                    if (btn) btn.innerText = '⬇ PowerPoint';
+                }
+            };
+
+            const renderSlide = (slide, index) => {
+                const isActive = index === currentSlide;
+
+                switch (slide.type) {
+                    case 'cover':
+                        return (
+                            <div key={index} className={`slide ${isActive ? 'active' : ''}`}>
+                                <h1>{slide.title}</h1>
+                                <div className="subtitle">{slide.subtitle}</div>
+                                <div className="authors">
+                                    {slide.authors.map((author, i) => (
+                                        <div key={i}>{author}</div>
+                                    ))}
+                                </div>
+                            </div>
+                        );
+
+                    case 'content':
+                        return (
+                            <div key={index} className={`slide ${isActive ? 'active' : ''}`}>
+                                <h2>{slide.title}</h2>
+                                {slide.subtitle && <h3>{slide.subtitle}</h3>}
+                                <div className="list">
+                                    {slide.content.map((item, i) => (
+                                        <div key={i} className="list-item">{item}</div>
+                                    ))}
+                                </div>
+                            </div>
+                        );
+
+                    case 'concept':
+                        return (
+                            <div key={index} className={`slide ${isActive ? 'active' : ''}`}>
+                                <h2>{slide.title}</h2>
+                                {slide.subtitle && <h3>{slide.subtitle}</h3>}
+                                <p>{slide.explanation}</p>
+                                {slide.purpose && <h3>{slide.purpose}</h3>}
+                                <div className="list">
+                                    {slide.details.map((item, i) => (
+                                        <div key={i} className="list-item">{item}</div>
+                                    ))}
+                                </div>
+                            </div>
+                        );
+
+                    case 'architecture':
+                        return (
+                            <div key={index} className={`slide ${isActive ? 'active' : ''}`}>
+                                <h2>{slide.title}</h2>
+                                {slide.subtitle && <h3>{slide.subtitle}</h3>}
+                                <div className="diagram">
+                                    {slide.components.map((comp, i) => (
+                                        <div key={i} className="list-item">{comp}</div>
+                                    ))}
+                                </div>
+                            </div>
+                        );
+
+                    case 'flow':
+                        return (
+                            <div key={index} className={`slide ${isActive ? 'active' : ''}`}>
+                                <h2>{slide.title}</h2>
+                                <div className="list">
+                                    {slide.steps.map((step, i) => (
+                                        <div key={i} className="list-item">{step}</div>
+                                    ))}
+                                </div>
+                            </div>
+                        );
+
+                    case 'example':
+                        return (
+                            <div key={index} className={`slide ${isActive ? 'active' : ''}`}>
+                                <h2>{slide.title}</h2>
+                                <h3>{slide.scenario}</h3>
+                                <div className="list">
+                                    {slide.analysis.map((item, i) => (
+                                        <div key={i} className="list-item">{item}</div>
+                                    ))}
+                                </div>
+                            </div>
+                        );
+
+                    case 'conclusion':
+                        return (
+                            <div key={index} className={`slide ${isActive ? 'active' : ''}`}>
+                                <h2>{slide.title}</h2>
+                                <div className="list">
+                                    {slide.content.map((item, i) => (
+                                        <div key={i} className="list-item">{item}</div>
+                                    ))}
+                                </div>
+                            </div>
+                        );
+
+                    case 'end':
+                        return (
+                            <div key={index} className={`slide ${isActive ? 'active' : ''}`}>
+                                <h1>{slide.title}</h1>
+                                <div className="subtitle">{slide.subtitle}</div>
+                                <div className="authors" style={{ marginTop: '4rem' }}>
+                                    {slide.footer}
+                                </div>
+                            </div>
+                        );
+
+                    default:
+                        return null;
+                }
+            };
+
+            return (
+                <div
+                    className="presentation"
+                    onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
+                    onTouchEnd={handleTouchEnd}
+                >
+                    {slides.map((slide, index) => renderSlide(slide, index))}
+
+                    <button className="nav-btn prev" onClick={prevSlide} disabled={currentSlide === 0}>
+                        ◀
+                    </button>
+                    <button className="nav-btn next" onClick={nextSlide} disabled={currentSlide === slides.length - 1}>
+                        ▶
+                    </button>
+
+                    <div className="progress">
+                        {currentSlide + 1} / {slides.length}
+                    </div>
+
+                    <div className="controls">
+                        <button className="control-btn" onClick={() => setLightMode(!lightMode)}>
+                            {lightMode ? '🌙 Dark' : '☀️ Light'}
+                        </button>
+                        <button className="control-btn" onClick={toggleFullscreen}>
+                            ⛶ Fullscreen
+                        </button>
+                        <button className="control-btn" onClick={goHome}>
+                            ⌂ Home
+                        </button>
+                        <button className="control-btn" onClick={prevSlide} disabled={currentSlide === 0}>
+                            ◀ Previous
+                        </button>
+                        <button className="control-btn" onClick={nextSlide} disabled={currentSlide === slides.length - 1}>
+                            Next ▶
+                        </button>
+                        <button className="control-btn download-btn" onClick={downloadPPTX}>
+                            ⬇ PowerPoint
+                        </button>
+                        <button className="control-btn" onClick={() => window.close()}>
+                            ✕ Exit
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<Presentation />);
+    </script>
+</body>
+
+</html>
