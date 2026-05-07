@@ -41,31 +41,27 @@
   </a>
 </p>
 
-<!-- ========= END BADGES ========= -->
-
 
 <br><br><br><br>
-<!-- ========= END BADGE ========= -->
+<!-- ========= END MAIUN BADGE ========= -->
+
 
 <!-- ======================================= Start nstitucional INFO ===========================================  -->
-
-<!-- ========= START SPONSORT BADGE ========= -->
  <!--### <p align="center">  <img src="https://github.githubassets.com/images/icons/emoji/octocat.png" width="46">  -->
 
 [**Institution:**]() Pontifical Catholic University of São Paulo (PUC-SP  Humanistic AI & Data Science • 5º Semestre • 2026 <br>
 [**School:**]() Faculty of Interdisciplinary Studies  <br>
 [Course Repo:]() INTEGRATED PROJECT: MACHINE LEARNING - 128 Hours <br>
 **Professor:**  [⭐️ Carlos Eduardo Paes]()  <br>
-[**Authors**:**  [Fabiana ⚡️ Campanari](https://linktr.ee/fabianacampanari) e [Perdro Vyctor Almeida]()  <br>
+**Authors**:**  [Fabiana ⚡️ Campanari](https://linktr.ee/fabianacampanari) e [Perdro Vyctor Almeida]()  <br>
 
 
 <br><br>
 
+#
+
+<br><br>
 <!-- ========= END Institucional INFO ========= -->
-
-
-<br><br>
-
 
 
 
@@ -74,10 +70,8 @@
 
 #### <p align="center"> [![Sponsor Mindful AI Assistants](https://img.shields.io/badge/Sponsor-%C2%B7%C2%B7%C2%B7%20Mindful%20AI%20Assistants%20%C2%B7%C2%B7%C2%B7-brightgreen?logo=GitHub)](https://github.com/sponsors/Mindful-AI-Assistants)
 
-
 <br><br>
 <!-- ========= END SPONSORTBADGE ========= -->
-
 
 
 <!-- =========  START DEMO VIDEO ========= -->
