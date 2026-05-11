@@ -131,7 +131,7 @@ In practice, the system was designed to receive events, occurrences, failures, d
 >
 > Explore the central hub containing complementary materials, technical documentation, analyses, and related projects:
 >
-> 🔗 **[Access the Distributed Systems Main Hub](https://github.com/Quantum-Software-Development/1-Distributed-Systems-Operating-Systems-Main-Hub)**
+> 🔗 **[Access the Distributed Systems Hub](https://github.com/Quantum-Software-Development/1-Distributed-Systems-Operating-Systems-Hub)**
 >
 > #
 >
