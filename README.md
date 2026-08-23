@@ -61,7 +61,7 @@ This project is designed as a governance and Responsible AI layer, focused on th
 [**School:**]() Faculty of Interdisciplinary Studies  <br>
 [Course Repo:]() INTEGRATED PROJECT: MACHINE LEARNING  <br>
 **Professor:**  [⭐️ Carlos Eduardo Paes](https://www.linkedin.com/in/carlos-eduardo-de-barros-paes-ph-d-7b137a4/)  <br>
-**Authors**:**  [Fabiana ⚡️ Campanari](https://linktr.ee/fabianacampanari) e [Perdro Vyctor Almeida]()  <br>
+
 
 
 <br><br>
