@@ -12,6 +12,32 @@
 <!-- ========= END REPO TITLE ========= -->
 
 
+ <!-- ========= START TEASER ========= -->
+<p align="center">🦾 <em>Connecting systems, intelligence, security, and humans — one distributed headache at a time</em> 🪽</p>
+
+<p align="center"><em>If it scales, it breaks. If it breaks, it becomes a feature.</em></p>
+
+### <p align="center">⚡️</p>
+
+<br>
+
+#
+
+<br><br>
+<!-- ========= END TEASER ========= -->
+
+
+<!-- ========= START SPONSOR BADGE ========= -->
+<p align="center">
+  <a href="https://github.com/sponsors/Mindful-AI-Research">
+    <img src="https://img.shields.io/badge/Sponsor-%E0%A5%90%20%E2%8B%86%20Mindful%20AI%20%E2%8B%86%20Research%20%26%20Consulting%20%F0%96%A4%90%20%E2%8B%86-00FFFF?style=for-the-badge&logo=githubsponsors&logoColor=white&labelColor=0a1f44" alt="Sponsor ॐ ⋆ Mindful AI ⋆ Research & Consulting 𖤐 ⋆">
+  </a>
+</p>
+
+
+<br><br>
+<!-- ========= END SPONSOR BADGE ========= -->
+
 <!-- ========= Start Overview ========= -->
 ## [Overview]()
 
@@ -143,15 +169,7 @@ In practice, the system was designed to receive events, occurrences, failures, d
 >
 > #
 >
-> ✨ Part of the *Humanistic AI & Data Modeling Series*
-> 
-> *Connecting distributed systems, artificial intelligence, cybersecurity, and human insight through scalable and interconnected technologies*. ⚡
->
-> ***In distributed systems, even the problems refuse to stay centralized.*** 🕸️
->
-> #
->
-> ### 🤖 AI Resources
+> ### 🦾 AI Resources
 >
 > High-signal resources for learning, building, and understanding modern AI systems.
 >
